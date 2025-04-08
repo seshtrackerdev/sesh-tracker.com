@@ -47,7 +47,7 @@ const DashboardPage: React.FC = () => {
       DashboardService.saveLocalDashboard(dashboard, widgetInstances);
       
       // Then try to save to cloud
-      await DashboardService.saveDashboardToCloud(dashboard, widgetInstances);
+      await DashboardService.saveDashboardToCloud();
       
       console.log('Dashboard saved successfully');
     } catch (error) {

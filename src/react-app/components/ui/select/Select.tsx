@@ -4,24 +4,9 @@ import { Check, ChevronDown } from 'lucide-react';
 import '../../../styles/Select.css';
 
 // Select Root
-// Revert to using React.ComponentPropsWithoutRef
-export interface SelectProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {
-  children: React.ReactNode;
-}
+export type SelectProps = SelectPrimitive.SelectProps;
 
-export const Select = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Root>,
-  SelectProps
->(({ children, ...props }, ref) => {
-  // Exclude ref from props being spread
-  const { ref: _ref, ...restProps } = props;
-  
-  return (
-    <SelectPrimitive.Root {...restProps} ref={ref}>
-      {children}
-    </SelectPrimitive.Root>
-  );
-});
+export const Select = SelectPrimitive.Root;
 Select.displayName = 'Select';
 
 // Select Trigger

@@ -313,7 +313,7 @@ const UIComponentsPage: React.FC = () => {
                 <Card interactive>
                   <h3>Interactive Card</h3>
                   <p>This card has hover and active states to indicate that it's interactive.</p>
-                  <Button variant="primary" size="small">Learn More</Button>
+                  <Button variant="primary" size="sm">Learn More</Button>
                 </Card>
               </div>
               

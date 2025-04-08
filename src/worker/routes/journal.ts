@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
-import { zValidator } from '@hono/zod-validator';
 
 // Create a router for journal entry tracking endpoints
 const journalRoutes = new Hono<{ 

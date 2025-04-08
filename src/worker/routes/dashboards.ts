@@ -172,7 +172,7 @@ dashboardRoutes.put('/:id', zValidator('json', dashboardSchema), async (c) => {
     const existingDashboard = await c.env.DB.prepare(
       `SELECT * FROM dashboards 
        WHERE id = ? AND userId = ?`
-    ).bind(dashboardId, user.id).first();
+    ).bind(dashboardId, user.id).first() as { version: number; isDefault: boolean; createdAt: string } | null;
     
     if (!existingDashboard) {
       return c.json({
