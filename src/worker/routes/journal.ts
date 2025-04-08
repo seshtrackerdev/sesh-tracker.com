@@ -1,9 +1,11 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
+import { AuthUser } from '../types/user';
+import { Bindings } from '../types';
 
 // Create a router for journal entry tracking endpoints
 const journalRoutes = new Hono<{ 
-  Bindings: Env,
+  Bindings: Bindings,
   Variables: {
     user: AuthUser;
     isDemoAccount?: boolean;

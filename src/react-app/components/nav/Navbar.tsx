@@ -84,8 +84,12 @@ export function Navbar() {
             ) : (
               // Show Log In / Sign Up if logged out
               <>
-                <Button variant="secondary" size="md" fullWidth>Log In</Button>
-                <Button variant="primary" size="md" fullWidth>Sign Up</Button>
+                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="secondary" size="md" fullWidth>Log In</Button>
+                </Link>
+                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="primary" size="md" fullWidth>Sign Up</Button>
+                </Link>
               </>
             )}
           </div>

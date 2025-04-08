@@ -23,11 +23,11 @@ export default defineConfig(({ mode }) => {
     define: {
       // Make environment variables available to client and server code
       'process.env.API_ENV': JSON.stringify(env.API_ENV || 'development'),
-      'process.env.AUTH_API_URL': JSON.stringify(env.AUTH_API_URL || 'https://kush.observer/api'),
+      'process.env.AUTH_API_URL': JSON.stringify(env.AUTH_API_URL || 'https://sesh-tracker.com/api/auth'),
       'process.env.API_TOKEN': JSON.stringify(env.API_TOKEN),
       // Expose the env variables specifically for the worker context
       __API_ENV__: JSON.stringify(env.API_ENV || 'development'),
-      __AUTH_API_URL__: JSON.stringify(env.AUTH_API_URL || 'https://kush.observer/api'),
+      __AUTH_API_URL__: JSON.stringify(env.AUTH_API_URL || 'https://sesh-tracker.com/api/auth'),
       __API_TOKEN__: JSON.stringify(env.API_TOKEN),
     }
   }

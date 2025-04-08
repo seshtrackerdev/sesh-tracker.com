@@ -1,15 +1,20 @@
 import { Hono } from 'hono';
+import { Context } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
+import { v4 as uuidv4 } from 'uuid';
+import { AuthUser } from '../types/user';
+import { Bindings } from '../types';
 
-// Create a router for dashboard endpoints
-const dashboardRoutes = new Hono<{ 
-  Bindings: Env,
-  Variables: {
-    user: AuthUser;
-    isDemoAccount?: boolean;
-    requestSource?: string;
-  }
+// Custom context type with authenticated user
+interface DashboardContext {
+  user: AuthUser;
+}
+
+// Create a new Hono app with typed bindings and variables
+const app = new Hono<{
+  Bindings: Bindings;
+  Variables: { user: AuthUser };
 }>();
 
 // Schema for dashboard creation/updates
@@ -28,40 +33,32 @@ const widgetSchema = z.object({
   showTitle: z.boolean().optional()
 });
 
-/**
- * Get all dashboards for the authenticated user
- */
-dashboardRoutes.get('/', async (c) => {
+// Get all dashboards for the authenticated user
+app.get('/', async (c) => {
   const user = c.get('user');
-  
+
   try {
-    // Query all dashboards for this user
+    // Query dashboards from the database
     const { results } = await c.env.DB.prepare(
-      `SELECT * FROM dashboards 
-       WHERE userId = ? 
-       ORDER BY updatedAt DESC`
-    ).bind(user.id).all();
-    
-    return c.json({
-      success: true,
-      data: results,
-      timestamp: new Date().toISOString()
-    });
+      `SELECT id, name, is_default, created_at, updated_at 
+       FROM dashboards 
+       WHERE user_id = ? 
+       ORDER BY updated_at DESC`
+    )
+    .bind(user.id)
+    .all();
+
+    return c.json(results);
   } catch (error) {
     console.error('Error fetching dashboards:', error);
-    
-    return c.json({
-      success: false,
-      error: 'Failed to fetch dashboards',
-      timestamp: new Date().toISOString()
-    }, 500);
+    return c.json({ error: 'Failed to fetch dashboards' }, 500);
   }
 });
 
 /**
  * Get a specific dashboard by ID
  */
-dashboardRoutes.get('/:id', async (c) => {
+app.get('/:id', async (c) => {
   const dashboardId = c.req.param('id');
   const user = c.get('user');
   
@@ -109,7 +106,7 @@ dashboardRoutes.get('/:id', async (c) => {
 /**
  * Create a new dashboard
  */
-dashboardRoutes.post('/', zValidator('json', dashboardSchema), async (c) => {
+app.post('/', zValidator('json', dashboardSchema), async (c) => {
   const user = c.get('user');
   const data = c.req.valid('json');
   
@@ -162,7 +159,7 @@ dashboardRoutes.post('/', zValidator('json', dashboardSchema), async (c) => {
 /**
  * Update an existing dashboard
  */
-dashboardRoutes.put('/:id', zValidator('json', dashboardSchema), async (c) => {
+app.put('/:id', zValidator('json', dashboardSchema), async (c) => {
   const dashboardId = c.req.param('id');
   const user = c.get('user');
   const data = c.req.valid('json');
@@ -240,7 +237,7 @@ dashboardRoutes.put('/:id', zValidator('json', dashboardSchema), async (c) => {
 /**
  * Delete a dashboard
  */
-dashboardRoutes.delete('/:id', async (c) => {
+app.delete('/:id', async (c) => {
   const dashboardId = c.req.param('id');
   const user = c.get('user');
   
@@ -292,7 +289,7 @@ dashboardRoutes.delete('/:id', async (c) => {
 /**
  * Create a new widget for a dashboard
  */
-dashboardRoutes.post('/widgets', zValidator('json', widgetSchema), async (c) => {
+app.post('/widgets', zValidator('json', widgetSchema), async (c) => {
   const user = c.get('user');
   const data = c.req.valid('json');
   
@@ -364,7 +361,7 @@ dashboardRoutes.post('/widgets', zValidator('json', widgetSchema), async (c) => 
 /**
  * Update a widget
  */
-dashboardRoutes.put('/widgets/:id', async (c) => {
+app.put('/widgets/:id', async (c) => {
   const widgetId = c.req.param('id');
   const user = c.get('user');
   const data = await c.req.json();
@@ -433,7 +430,7 @@ dashboardRoutes.put('/widgets/:id', async (c) => {
 /**
  * Delete a widget
  */
-dashboardRoutes.delete('/widgets/:id', async (c) => {
+app.delete('/widgets/:id', async (c) => {
   const widgetId = c.req.param('id');
   const user = c.get('user');
   
@@ -488,7 +485,7 @@ dashboardRoutes.delete('/widgets/:id', async (c) => {
 /**
  * Get all templates
  */
-dashboardRoutes.get('/templates', async (c) => {
+app.get('/templates', async (c) => {
   try {
     // In the future, these could be loaded from the database
     // For now, return hardcoded templates
@@ -532,7 +529,7 @@ dashboardRoutes.get('/templates', async (c) => {
 /**
  * Get a specific template
  */
-dashboardRoutes.get('/templates/:id', async (c) => {
+app.get('/templates/:id', async (c) => {
   const templateId = c.req.param('id');
   
   // Hardcoded template data with widgets
@@ -745,4 +742,4 @@ dashboardRoutes.get('/templates/:id', async (c) => {
   });
 });
 
-export default dashboardRoutes; 
+export default app; 

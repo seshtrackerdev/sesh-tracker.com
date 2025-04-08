@@ -48,7 +48,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
         
         // Fetch the user's profile with the token
-        const response = await fetch('/api/v1/auth/profile', {
+        const response = await fetch('/api/auth/verify', {
+          method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -77,20 +78,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
     
     checkAuth();
-    
-    // For demo/development purposes, you can use a mock user
-    // Use a simple check instead of process.env which requires Node types
-    if (window.location.hostname === 'localhost') {
-      setUser({
-        id: 'test-user-id',
-        email: 'tester@email.com',
-        displayName: 'Test User',
-        role: 'user',
-        accountType: 'test',
-        subscriptionTier: 'basic',
-      });
-      setLoading(false);
-    }
   }, []);
 
   // Login function
@@ -100,7 +87,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setError(null);
       
       // Call your authentication API
-      const response = await fetch('/api/v1/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -138,7 +125,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setError(null);
       
       // Call your registration API
-      const response = await fetch('/api/v1/auth/signup', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -170,7 +157,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setError(null);
       
       // Call your password reset API
-      const response = await fetch('/api/v1/auth/reset-password', {
+      const response = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

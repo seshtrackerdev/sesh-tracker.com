@@ -1,5 +1,6 @@
 // Import WidgetUtils directly from lowercase dashboard path
 import WidgetUtils from '../dashboard/widgets/WidgetUtils';
+// @ts-ignore
 import { Dashboard, DashboardRow, ColumnDefinition, WidgetInstance } from './types';
 import { v4 as uuidv4 } from 'uuid';
 

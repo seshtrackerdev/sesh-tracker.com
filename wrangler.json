@@ -18,14 +18,19 @@
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "sesh-tracker-prod",
-          "database_id": "76506e3c-b319-44c3-8090-c6a6b6ffbe5c"
+          "database_name": "sesh-tracker-new-prod",
+          "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
+        },
+        {
+          "binding": "SESHDBPROD",
+          "database_name": "sesh-tracker-new-prod",
+          "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
         }
       ],
       "vars": {
         "API_ENV": "production",
-        "AUTH_API_URL": "https://kush.observer/api",
-        "API_TOKEN": "KRdjpPJr5PBXBjl4kNLborxvvoOiVJFo"
+        "JWT_SECRET": "KRdjpPJr5PBXBjl4kNLborxvvoOiVJFo",
+        "AUTH_API_URL": "https://sesh-tracker.com/api/auth"
       },
       "kv_namespaces": [
         {
@@ -38,14 +43,19 @@
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "sesh-tracker-dev",
-          "database_id": "43120f51-f4d0-4847-bcb2-95f235eebf25"
+          "database_name": "sesh-tracker-new-prod",
+          "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
+        },
+        {
+          "binding": "SESHDBPROD",
+          "database_name": "sesh-tracker-new-prod",
+          "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
         }
       ],
       "vars": {
         "API_ENV": "development",
-        "AUTH_API_URL": "https://kush.observer/api",
-        "API_TOKEN": "snluudqQYfmADaMCF03Qe5cxqVrcMVin"
+        "JWT_SECRET": "snluudqQYfmADaMCF03Qe5cxqVrcMVin",
+        "AUTH_API_URL": "https://sesh-tracker.com/api/auth"
       },
       "routes": [
         { "pattern": "localhost:8787/*", "zone_name": "localhost" }
@@ -69,13 +79,19 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "sesh-tracker-prod",
-      "database_id": "76506e3c-b319-44c3-8090-c6a6b6ffbe5c"
+      "database_name": "sesh-tracker-new-prod",
+      "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
     },
     {
-      "binding": "DB_DEV",
-      "database_name": "sesh-tracker-dev",
-      "database_id": "43120f51-f4d0-4847-bcb2-95f235eebf25"
+      "binding": "SESHDBPROD",
+      "database_name": "sesh-tracker-new-prod",
+      "database_id": "fbaabd30-99b3-441b-83a1-597266937deb"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "DASHBOARD_CACHE",
+      "id": "991a5d7a3fd14dbfbd0ecccc6bf8d730"
     }
   ]
 }

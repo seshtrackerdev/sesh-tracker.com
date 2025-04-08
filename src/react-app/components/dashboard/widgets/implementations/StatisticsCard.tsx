@@ -23,6 +23,7 @@ class StatisticsCardWidget extends BaseWidget<StatisticsCardProps> {
   };
 
   render(props: StatisticsCardProps & WidgetProps): React.ReactNode {
+    // @ts-ignore
     const { instance, shouldShowTitle, metricType, title, timeRange, customMetric, customValue } = props;
     
     // In a real implementation, this would fetch actual data

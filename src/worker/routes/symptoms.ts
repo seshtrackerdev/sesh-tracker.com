@@ -1,10 +1,12 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
+import { AuthUser } from '../types/user';
+import { Bindings } from '../types';
 
 // Create a router for medical symptom tracking endpoints
 const symptomRoutes = new Hono<{ 
-  Bindings: Env,
+  Bindings: Bindings,
   Variables: {
     user: AuthUser;
     isDemoAccount?: boolean;

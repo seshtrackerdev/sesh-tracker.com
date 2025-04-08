@@ -1,10 +1,12 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
+import { AuthUser } from '../types/user';
+import { Bindings } from '../types';
 
 // Create a router for mood tracking endpoints
 const moodRoutes = new Hono<{ 
-  Bindings: Env,
+  Bindings: Bindings,
   Variables: {
     user: AuthUser;
     isDemoAccount?: boolean;

@@ -6,7 +6,10 @@ import UIComponentsPage from './pages/UIComponentsPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage';
 import WellnessPage from './pages/WellnessPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import MainLayout from './layouts/MainLayout';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Lazy-loaded pages
 const TagsShowcasePage = lazy(() => import('./pages/TagsShowcasePage'));
@@ -26,11 +29,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <DashboardPage />,
+        element: (
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/wellness',
-        element: <WellnessPage />,
+        element: (
+          <ProtectedRoute>
+            <WellnessPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/ui-components',
@@ -47,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: '/support',
         element: <ContactPage />,
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/signup',
+        element: <SignupPage />,
       },
       {
         path: '*',
