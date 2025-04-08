@@ -1,0 +1,66 @@
+.consumption-analytics {
+    /* Styles for the main analytics card */
+    margin-bottom: 1rem;
+  }
+  
+  .analytics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
+    gap: 1rem;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .chart-placeholder {
+    border: 2px dashed #ccc; /* Dashed border for placeholder */
+    padding: 2rem;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+  
+  .chart-placeholder h4 {
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .chart-placeholder p {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .chart-placeholder pre {
+    text-align: left;
+    background-color: #eee;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8em;
+    max-height: 200px;
+    overflow: auto;
+  }
+  
+  .no-data-message {
+    text-align: center;
+    color: #888;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+  
+  /* Add styles for SelectTrigger, SelectContent, SelectItem if needed */
+  /* Example: */
+  /* .w-\[180px\] { width: 180px; } */
+  
+  /* Add styles for icons if necessary */
+  /* .inline { display: inline-block; } */
+  /* .h-4 { height: 1rem; } */
+  /* .w-4 { width: 1rem; } */
+  /* .ml-2 { margin-left: 0.5rem; } */
+  
+</rewritten_file> 

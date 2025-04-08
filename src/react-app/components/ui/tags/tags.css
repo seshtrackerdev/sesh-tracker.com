@@ -1,0 +1,265 @@
+/* Base Tag Styles */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; /* Pill shape */
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* Tag Sizes */
+.tag-sm {
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+}
+
+.tag-md {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+.tag-lg {
+  height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+/* Tag Variants */
+.tag-default {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border: 1px solid transparent;
+}
+
+.tag-outline {
+  background-color: transparent;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+.tag-subtle {
+  background-color: rgba(45, 45, 45, 0.5);
+  color: #e0e0e0;
+  border: 1px solid transparent;
+}
+
+/* Interactive Tag */
+.tag-interactive {
+  cursor: pointer;
+}
+
+.tag-interactive:hover {
+  background-color: #3d3d3d;
+  transform: translateY(-1px);
+}
+
+.tag-interactive:active {
+  transform: translateY(0);
+}
+
+/* Selected Tag */
+.tag-selected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tag-selected.tag-outline {
+  border-color: #4CAF50;
+  color: #4CAF50;
+  background-color: transparent;
+}
+
+/* Disabled Tag */
+.tag-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tag-disabled:hover {
+  transform: none;
+}
+
+/* Tag with Icon */
+.tag-with-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tag-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-icon-left {
+  margin-right: 0.375rem;
+}
+
+.tag-icon-right {
+  margin-left: 0.375rem;
+}
+
+/* Removable Tag */
+.tag-removable {
+  padding-right: 0.25rem;
+}
+
+.tag-content {
+  margin-right: 0.25rem;
+}
+
+.tag-remove-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0.125rem;
+  transition: all 0.2s ease;
+}
+
+.tag-remove-button:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Color Variants - Base Colors */
+.tag-green {
+  background-color: #43a047;
+  color: white;
+}
+
+.tag-purple {
+  background-color: #8e24aa;
+  color: white;
+}
+
+.tag-blue {
+  background-color: #1e88e5;
+  color: white;
+}
+
+.tag-orange {
+  background-color: #f57c00;
+  color: white;
+}
+
+.tag-red {
+  background-color: #e53935;
+  color: white;
+}
+
+.tag-yellow {
+  background-color: #fdd835;
+  color: #212121;
+}
+
+.tag-teal {
+  background-color: #00897b;
+  color: white;
+}
+
+.tag-brown {
+  background-color: #795548;
+  color: white;
+}
+
+/* Outline color variants */
+.tag-outline.tag-green {
+  border-color: #43a047;
+  color: #43a047;
+  background-color: transparent;
+}
+
+.tag-outline.tag-purple {
+  border-color: #8e24aa;
+  color: #8e24aa;
+  background-color: transparent;
+}
+
+.tag-outline.tag-blue {
+  border-color: #1e88e5;
+  color: #1e88e5;
+  background-color: transparent;
+}
+
+.tag-outline.tag-orange {
+  border-color: #f57c00;
+  color: #f57c00;
+  background-color: transparent;
+}
+
+.tag-outline.tag-red {
+  border-color: #e53935;
+  color: #e53935;
+  background-color: transparent;
+}
+
+.tag-outline.tag-yellow {
+  border-color: #fdd835;
+  color: #fdd835;
+  background-color: transparent;
+}
+
+.tag-outline.tag-teal {
+  border-color: #00897b;
+  color: #00897b;
+  background-color: transparent;
+}
+
+.tag-outline.tag-brown {
+  border-color: #795548;
+  color: #795548;
+  background-color: transparent;
+}
+
+/* Subtle color variants */
+.tag-subtle.tag-green {
+  background-color: rgba(67, 160, 71, 0.2);
+  color: #7bc67e;
+}
+
+.tag-subtle.tag-purple {
+  background-color: rgba(142, 36, 170, 0.2);
+  color: #c26bd1;
+}
+
+.tag-subtle.tag-blue {
+  background-color: rgba(30, 136, 229, 0.2);
+  color: #64b5f6;
+}
+
+.tag-subtle.tag-orange {
+  background-color: rgba(245, 124, 0, 0.2);
+  color: #ffad42;
+}
+
+.tag-subtle.tag-red {
+  background-color: rgba(229, 57, 53, 0.2);
+  color: #ef5350;
+}
+
+.tag-subtle.tag-yellow {
+  background-color: rgba(253, 216, 53, 0.2);
+  color: #fdd835;
+}
+
+.tag-subtle.tag-teal {
+  background-color: rgba(0, 137, 123, 0.2);
+  color: #4db6ac;
+}
+
+.tag-subtle.tag-brown {
+  background-color: rgba(121, 85, 72, 0.2);
+  color: #a1887f;
+} 

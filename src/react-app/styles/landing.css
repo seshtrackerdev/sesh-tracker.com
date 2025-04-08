@@ -1,0 +1,309 @@
+/* Landing Page Styling - DARK MODE ONLY */
+
+:root {
+  --primary-green: #4CAF50;  /* Cannabis theme color */
+  --accent-purple: #9C27B0;
+  --text-light: #e0e0e0;     /* Light text for dark backgrounds */
+  --text-muted: #a0a0a0;     /* Secondary text */
+  --bg-dark: #121212;        /* Main background */
+  --bg-darker: #0a0a0a;      /* Secondary background */
+  --bg-elevated: #1e1e1e;    /* Elevated UI elements */
+  --border-color: #333;      /* Border color */
+}
+
+.landing-container {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding-top: 60px; /* Add padding for the navbar */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove scroll-snap initially - only enable after tour starts */
+.landing-container-tour-active {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Section styling */
+.hero-section,
+.tour-section,
+.cta-section {
+  width: 100%; /* Use 100% instead of 100vw to prevent overflow */
+  min-height: calc(100vh - 60px); /* Adjust for navbar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  align-self: center; /* Center in parent flex container */
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Only apply scroll-snap when tour is active */
+.landing-container-tour-active .hero-section,
+.landing-container-tour-active .tour-section,
+.landing-container-tour-active .cta-section {
+  scroll-snap-align: start;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%; /* Change from 100vw to 100% */
+  box-sizing: border-box;
+  background-image: linear-gradient(rgba(18, 18, 18, 0.92), rgba(10, 10, 10, 0.95)), 
+                    url('https://images.unsplash.com/photo-1536689335422-ffca2c4645bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px; /* Set a max-width for larger screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem; /* Increase horizontal padding */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-section h1 {
+  color: var(--primary-green);
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 90%; /* Larger width */
+  text-align: center;
+}
+
+.hero-section p {
+  max-width: 80%; /* Wider paragraph */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  font-size: 1.25rem; /* Slightly larger text */
+  text-align: center;
+}
+
+.discover-button {
+  background-color: var(--primary-green);
+  color: var(--text-light);
+  transition: all 0.3s;
+  padding: 0.875rem 2.5rem;
+  font-size: 1.125rem;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.discover-button:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+  z-index: -1;
+}
+
+.discover-button:hover {
+  background-color: #3a8a3e; /* Darker green on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.discover-button:hover:after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Scroll Indicator - Only show when tour is not active */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.landing-container-tour-active .hero-scroll-indicator {
+  display: none;
+}
+
+.hero-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid var(--primary-green);
+  border-radius: 20px;
+  position: relative;
+}
+
+.hero-mouse-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--primary-green);
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  animation: scroll 1.5s infinite;
+}
+
+.hero-arrow-down {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--primary-green);
+  border-bottom: 2px solid var(--primary-green);
+  transform: rotate(45deg);
+  margin-top: 8px;
+  animation: arrow-pulse 1.5s infinite;
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(15px);
+  }
+}
+
+@keyframes arrow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Tour Section */
+.tour-section {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  position: relative;
+}
+
+.tour-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
+}
+
+.tour-section ul {
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background-color: var(--bg-light);
+}
+
+.cta-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Headline animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Responsive adjustments for Medium screens and up (Tablets) */
+@media (min-width: 768px) {
+  .hero-section h1 {
+    font-size: 3.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.25rem;
+  }
+
+  .tour-section h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Responsive adjustments for Large screens and up (Desktops) */
+@media (min-width: 1024px) {
+  .hero-section,
+  .tour-section,
+  .cta-section {
+    padding: 4rem 2rem;
+  }
+
+  .hero-section h1 {
+    font-size: 4.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.5rem;
+    max-width: 800px;
+  }
+}
+
+/* Add after the landing-container styles */
+
+.tour-content-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add to the media queries at the bottom */
+
+@media screen and (max-width: 768px) {
+  .landing-container {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .hero-section {
+    width: 100vw;
+    padding: 1rem;
+    margin: 0;
+  }
+  
+  .hero-content {
+    width: 100%;
+  }
+} 

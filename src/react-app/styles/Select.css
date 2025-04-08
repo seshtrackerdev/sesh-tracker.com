@@ -1,0 +1,117 @@
+/* Select Component Styles */
+
+/* Container for the entire select component */
+.select-container {
+  position: relative;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* Trigger button that opens/closes the dropdown */
+.select-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: inherit;
+  text-align: left;
+  min-height: 40px;
+}
+
+.select-trigger:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+}
+
+.select-trigger.open {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(125, 125, 125, 0.3);
+}
+
+.select-trigger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Dropdown chevron icon */
+.select-chevron {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.select-trigger.open .select-chevron {
+  transform: rotate(180deg);
+}
+
+/* Value display area */
+.select-value {
+  flex: 1;
+}
+
+/* Placeholder text styling */
+.select-placeholder {
+  color: #777;
+}
+
+/* Dropdown content */
+.select-content {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  border-radius: 6px;
+  background-color: #1f1f1f;
+  border: 1px solid #444;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Viewport for scrollable content */
+.select-viewport {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Individual select items */
+.select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #e0e0e0;
+  user-select: none;
+}
+
+.select-item:hover {
+  background-color: #2a2a2a;
+}
+
+.select-item.selected {
+  background-color: #333;
+  font-weight: 500;
+}
+
+.select-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Checkmark icon for selected item */
+.select-check {
+  width: 16px;
+  height: 16px;
+  color: #4CAF50; /* Match primary/brand color */
+} 

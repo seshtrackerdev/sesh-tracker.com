@@ -1,0 +1,123 @@
+# 🌿 SeshTracker Landing Page – Concept Brief (Zero-Context AI-Readable)
+
+## 🎯 Objective
+
+The SeshTracker landing page should introduce users to the purpose of the platform and gently guide them toward signing up or logging in — all while showcasing the value of the app through a dynamic, informative, and **interactive** walkthrough. This page should inspire curiosity, highlight the unique benefits of SeshTracker, and establish a trusted, user-friendly experience.
+
+---
+
+## 🧭 Core User Journey (Intent-Based Flow)
+
+### 1. **Inspire**
+> "What is this? Why should I care?"
+
+- Use a bold headline that rotates or animates key user outcomes:
+  - “Track your Strains”
+  - “Understand your Usage”
+  - “Visualize your High”
+  - “Never Forget What Worked”
+
+- A simple paragraph that explains the problem SeshTracker solves in one sentence.
+
+---
+
+### 2. **Engage**
+> "Show me what it does — give me a tour"
+
+- The page introduces an **interactive guided tour** that:
+  - Animates into view after clicking “Discover SeshTracker”
+  - Uses scroll or arrow keys to move between sections
+  - Displays one section at a time for focus
+
+- Each section contains:
+  - A short header (e.g., “Track Effects”)
+  - A relevant benefit list (e.g., “📊 Know what works, what doesn’t”)
+  - Optional graphic or visual (can be abstract or data-themed)
+  - A button to move forward in the tour
+
+---
+
+### 3. **Educate**
+> "What makes this different?"
+
+- Use sections to explain:
+  - Personalized dashboards (users build their own)
+  - Inventory tracking linked to real usage
+  - Mood/effect correlation over time
+  - It’s designed “by stoners, for stoners” (language should reflect authenticity)
+
+---
+
+### 4. **Convert**
+> "Okay, I’m in. Let’s go."
+
+- A final section should include:
+  - Social proof (emojis, simple trust indicators like “Private”, “Free”)
+  - A visual CTA element (button, icon, or symbol)
+  - Direct call to action: “Start Tracking”, “Sign Up Now”, or similar
+
+---
+
+## 🧑‍🎨 Design Vibe
+
+- Cannabis-themed without being cliché
+- Light or dark mode ready
+- Soft motion transitions and scroll effects
+- Emoji-forward UX is welcome
+- Fully responsive (mobile → desktop)
+
+---
+
+## ♿ Accessibility Requirements
+
+- Keyboard navigable
+- Semantic HTML
+- Announceable regions (`aria-live`) for dynamic updates
+- Skip links / visual indicator of current section
+- Visible focus states
+
+---
+
+## 🔑 Functional Highlights
+
+- All interaction can happen without logging in
+- Only at the end does the page ask the user to sign up or log in
+- The experience should feel like exploring, not reading
+- Should not depend on backend API or auth to render
+
+---
+
+## 📂 Implementation Notes (AI Reference)
+
+- Use a single `<LandingPage />` component as root
+- Create modular subcomponents for:
+  - `HeroSection` (headline)
+  - `TourSection` (modular feature/benefit blocks)
+  - `CallToAction` (final signup)
+  - `TourManager` (manages scroll, progress, keyboard)
+- Central state: `isTourStarted`, `activeSection`, `theme`
+
+---
+
+## 🛑 Do Not
+
+- Do not overload the page with dense text
+- Do not use modals or popups
+- Do not require login to explore
+- Do not use cannabis stereotypes (e.g., 420 jokes, overuse of leaves)
+
+---
+
+## ✅ Vision Alignment Summary
+
+| Area | Principle |
+|------|-----------|
+| Interaction | Curiosity-first, no wall of text |
+| Accessibility | Must be inclusive, screen-reader friendly |
+| Theme | Clean, cannabis-inspired, emoji-safe |
+| Call to Action | Soft. “Start Tracking” instead of “Join Now” |
+| Differentiation | “By stoners, for stoners.” Personalization + privacy + insights |
+
+---
+
+_Last Updated: April 7th, 2025 @ 4:42pm — Intended for AI-first Landing Page Rebuild_

@@ -1,0 +1,96 @@
+@startuml Sesh-Tracker Authentication Flow
+
+skinparam handwritten false
+skinparam monochrome false
+skinparam componentStyle uml2
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam sequence {
+  ArrowColor #1a73e8
+  ActorBorderColor #1a73e8
+  LifeLineBorderColor #1a73e8
+  ParticipantBorderColor #1a73e8
+  ParticipantBackgroundColor #e8f0fe
+}
+
+actor User
+participant "Sesh-Tracker\nUI" as UI
+participant "Sesh-Tracker\nWorker" as Worker
+participant "Kush.Observer\nAuth API" as KushAuth
+database "Sesh-Tracker\nD1 Database" as D1
+
+title Sesh-Tracker / Kush.Observer Authentication Flow
+
+== Initial Authentication ==
+
+User -> UI: Clicks Login
+note right of User: User wants to access\ntheir dashboard
+
+UI -> Worker: Redirect to /api/auth/login
+Worker -> KushAuth: Request OAuth Authorization
+note right of Worker: Includes client ID\nand redirect URI
+
+KushAuth -> User: Display Login Page
+User -> KushAuth: Enter Credentials
+KushAuth -> KushAuth: Validate Credentials
+
+KushAuth -> Worker: Redirect with Auth Code
+Worker -> KushAuth: Exchange Code for Tokens
+note right of Worker: POST /auth/token\nwith client secret
+
+KushAuth --> Worker: Return Access & Refresh Tokens
+note right of KushAuth: JWT with user claims
+
+Worker -> Worker: Create User Session
+Worker -> D1: Store/Update User Info
+note right of Worker: Store user ID, email,\nrole, preferences
+
+Worker -> UI: Redirect with Session Cookie
+note right of Worker: Sets HTTP-only\nsecure cookie
+
+UI -> UI: Update Auth Context
+UI -> UI: Show Authenticated UI
+note right of UI: User now sees\ntheir dashboard
+
+== Subsequent API Requests ==
+
+User -> UI: Click Dashboard Element
+UI -> Worker: API Request with Auth Cookie
+note right of UI: Includes session cookie\nor bearer token
+
+Worker -> Worker: Extract Token
+Worker -> KushAuth: Verify Token
+note right of Worker: POST /auth/verify\nwith token
+
+KushAuth --> Worker: Token Validation Response
+note right of KushAuth: Includes user info\nand permissions
+
+alt Valid Token
+    Worker -> D1: Query User Data
+    D1 --> Worker: Return User Data
+    Worker --> UI: Return API Response
+    UI -> User: Display Updated UI
+else Invalid/Expired Token
+    Worker -> Worker: Attempt Token Refresh
+    Worker -> KushAuth: Request New Token
+    KushAuth --> Worker: New Tokens
+    
+    alt Refresh Successful
+        Worker -> UI: Update Session & Retry
+    else Refresh Failed
+        Worker -> UI: Return Auth Error
+        UI -> User: Show Login Required
+    end
+end
+
+== Account Updates via Webhook ==
+
+KushAuth -> KushAuth: User Updates Profile
+KushAuth -> Worker: POST /webhooks/kush-user-update
+note right of KushAuth: Signed webhook with\nuser changes
+
+Worker -> Worker: Verify Webhook Signature
+Worker -> D1: Update User Data
+note right of Worker: Syncs user profile\nwith latest data
+
+@enduml 

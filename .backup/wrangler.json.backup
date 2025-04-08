@@ -1,0 +1,62 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sesh-tracker-com",
+  "main": "./src/worker/index.ts",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "assets": {
+    "not_found_handling": "single-page-application"
+  },
+  
+  "env": {
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "sesh-tracker-db",
+          "database_id": "replace-with-actual-db-id-in-cloudflare"
+        }
+      ],
+      "vars": {
+        "API_ENV": "production",
+        "AUTH_API_URL": "https://kush.observer/api"
+      },
+      "kv_namespaces": [
+        {
+          "binding": "DASHBOARD_CACHE",
+          "id": "replace-with-actual-kv-id-in-cloudflare"
+        }
+      ]
+    },
+    "development": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "sesh-tracker-dev-db"
+        }
+      ],
+      "vars": {
+        "API_ENV": "development",
+        "AUTH_API_URL": "https://kush.observer/api"
+      },
+      "routes": {
+        "pattern": "localhost:8787/*",
+        "zone_name": "localhost"
+      }
+    }
+  },
+  
+  "build": {
+    "command": "npm run build",
+    "watch_dir": "src"
+  },
+  
+  "dev": {
+    "port": 8787,
+    "local_protocol": "http"
+  }
+}

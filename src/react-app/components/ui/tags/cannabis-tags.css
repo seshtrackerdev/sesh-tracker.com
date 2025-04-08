@@ -1,0 +1,167 @@
+/* Cannabis-specific Tag Styles */
+
+/* Strain Tag Styles */
+.strain-tag {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 5rem;
+}
+
+.strain-tag-indica {
+  background-color: rgba(142, 36, 170, 0.9);
+}
+
+.strain-tag-sativa {
+  background-color: rgba(67, 160, 71, 0.9);
+}
+
+.strain-tag-hybrid {
+  background-color: rgba(30, 136, 229, 0.9);
+}
+
+.strain-tag-label {
+  font-weight: 500;
+}
+
+.strain-intensity-indicator {
+  position: relative;
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.strain-intensity-bar {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+}
+
+/* Chemical Tag Styles */
+.chemical-tag {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 6rem;
+  padding-right: 1rem;
+}
+
+.chemical-compound {
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.chemical-percentage {
+  font-weight: 500;
+}
+
+.chemical-meter-container {
+  position: relative;
+  height: 4px;
+  width: 2rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.chemical-meter {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+}
+
+/* Effect Tag Styles */
+.effect-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.effect-name {
+  font-weight: 500;
+}
+
+.effect-intensity {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.effect-intensity-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.effect-intensity-dot.active {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Product Tag Styles */
+.product-tag {
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+}
+
+.product-tag .tag-icon {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Terpene Tag Styles */
+.terpene-tag {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem;
+  min-width: 7rem;
+  border-radius: 6px;
+}
+
+.terpene-tag-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.terpene-name {
+  font-weight: 600;
+}
+
+.terpene-percentage {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.terpene-flavor {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.terpene-meter-container {
+  position: relative;
+  height: 3px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.terpene-meter {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+} 

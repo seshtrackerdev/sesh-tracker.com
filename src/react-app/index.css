@@ -3,10 +3,60 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* DARK MODE ONLY - Color Scheme */
+  color-scheme: dark;
+  
+  /* Base Colors */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-elevated: #252525;
+  --bg-input: #2a2a2a;
+  
+  /* Text Colors */
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #6c6c6c;
+  
+  /* Border & Divider */
+  --border-color: #333;
+  --border-color-hover: #444;
 
+  /* Brand Colors */
+  --cannabis-green: #4CAF50;
+  --cannabis-green-rgb: 76, 175, 80;
+  --cannabis-green-hover: #3a8a3e;
+  --cannabis-purple: #9C27B0;
+  --cannabis-purple-rgb: 156, 39, 176;
+  --cannabis-purple-hover: #7B1FA2;
+
+  /* Status Colors */
+  --success-color: #4CAF50;
+  --warning-color: #FF9800;
+  --error-color: #F44336;
+  --error-color-rgb: 244, 67, 54;
+  --info-color: #2196F3;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  
+  /* Apply Base Theme */
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  /* System Preferences */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,54 +65,90 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--cannabis-green);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--cannabis-green-hover);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  display: block;
+  min-width: 100vw;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0 0 1rem 0;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
+button:hover {
+  background-color: #2d2d2d;
+  border-color: var(--cannabis-green);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--cannabis-green);
+  outline-offset: 2px;
+}
+
+/* Force dark mode for all system preferences */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
   }
+  
   a:hover {
-    color: #747bff;
+    color: var(--cannabis-green-hover);
   }
+  
   button {
-    background-color: #f9f9f9;
+    background-color: var(--bg-elevated);
   }
+}
+
+/* Main content - to prevent navbar overlap */
+.main-content {
+  padding-top: 80px; /* Adjust based on navbar height */
+  min-height: calc(100vh - 80px);
+  width: 100%;
 }

@@ -1,0 +1,130 @@
+/* Checkbox Component Styles - DARK MODE ONLY */
+
+/* Container */
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+/* Wrapper for checkbox and label */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hide the default input */
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom checkbox appearance */
+.checkbox-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--bg-input);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+/* Checkbox text/label */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-text {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+/* Checked state */
+.checkbox-input:checked + .checkbox-label .checkbox-box {
+  background-color: var(--cannabis-green);
+  border-color: var(--cannabis-green);
+}
+
+.checkbox-input:checked + .checkbox-label .checkbox-box::after {
+  content: '';
+  width: 0.375rem;
+  height: 0.625rem;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0.125rem;
+}
+
+/* Indeterminate state */
+.checkbox-input:indeterminate + .checkbox-label .checkbox-box {
+  background-color: var(--cannabis-green);
+  border-color: var(--cannabis-green);
+}
+
+.checkbox-input:indeterminate + .checkbox-label .checkbox-box::after {
+  content: '';
+  width: 0.625rem;
+  height: 0.125rem;
+  background-color: white;
+  position: absolute;
+}
+
+/* Focus state */
+.checkbox-input:focus + .checkbox-label .checkbox-box {
+  box-shadow: 0 0 0 2px rgba(var(--cannabis-green-rgb), 0.3);
+}
+
+/* Hover state */
+.checkbox-label:hover .checkbox-box {
+  border-color: var(--cannabis-green);
+}
+
+/* Disabled state */
+.checkbox-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkbox-disabled .checkbox-wrapper {
+  cursor: not-allowed;
+}
+
+.checkbox-disabled .checkbox-label {
+  cursor: not-allowed;
+}
+
+/* Error state */
+.checkbox-error .checkbox-box {
+  border-color: var(--error-color);
+}
+
+.checkbox-error .checkbox-input:checked + .checkbox-label .checkbox-box,
+.checkbox-error .checkbox-input:indeterminate + .checkbox-label .checkbox-box {
+  background-color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+/* Helper text */
+.checkbox-helper-text {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-left: 1.625rem; /* Align with text */
+  color: var(--text-secondary);
+}
+
+.checkbox-error-text {
+  color: var(--error-color);
+} 

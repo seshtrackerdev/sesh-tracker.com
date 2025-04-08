@@ -1,0 +1,654 @@
+/* InsightfulSessionForm Component Styles - DARK MODE ONLY */
+
+.insightful-session {
+  width: 100%;
+}
+
+/* Start button */
+.insightful-session-start-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.25) 0%, rgba(61, 90, 254, 0.25) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  border-radius: var(--border-radius-lg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.insightful-session-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--cannabis-green);
+}
+
+.insightful-session-start-btn:active {
+  transform: translateY(0);
+}
+
+/* Button icon */
+.insightful-session-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--cannabis-green);
+  color: white;
+  flex-shrink: 0;
+}
+
+.insightful-session-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* Button text */
+.insightful-session-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.insightful-session-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.insightful-session-sublabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Active session state */
+.insightful-session-active {
+  width: 100%;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Timer display */
+.insightful-session-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 0.5rem;
+}
+
+.insightful-session-timer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--cannabis-green);
+  color: white;
+}
+
+.insightful-session-timer-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.insightful-session-timer-display {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+/* Form sections */
+.insightful-session-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem;
+}
+
+.form-group-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-section label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Mood options */
+.mood-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-width: 4rem;
+}
+
+.mood-option:hover {
+  background-color: var(--bg-hover);
+}
+
+.mood-option.selected {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: var(--cannabis-green);
+}
+
+.mood-emoji {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.mood-name {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Strain select */
+.strain-select {
+  padding: 0.75rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+.strain-select:focus {
+  outline: none;
+  border-color: var(--cannabis-green);
+}
+
+/* Method options */
+.method-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.method-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.method-option:hover {
+  background-color: var(--bg-hover);
+}
+
+.method-option.selected {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: var(--cannabis-green);
+}
+
+.method-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cannabis-green);
+}
+
+/* Type options */
+.type-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.type-option {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.type-option:hover {
+  background-color: var(--bg-hover);
+}
+
+.type-option.selected {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: var(--cannabis-green);
+}
+
+/* Purpose options */
+.purpose-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.purpose-option {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.purpose-option:hover {
+  background-color: var(--bg-hover);
+}
+
+.purpose-option.selected {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: var(--cannabis-green);
+}
+
+/* Setting options */
+.setting-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.setting-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.setting-option:hover {
+  background-color: var(--bg-hover);
+}
+
+.setting-option.selected {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: var(--cannabis-green);
+}
+
+.setting-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cannabis-green);
+}
+
+/* Sliders */
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: var(--border-radius-full);
+  background: var(--bg-primary);
+  outline: none;
+  margin: 0.5rem 0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--cannabis-green);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.slider::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--cannabis-green);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Companions slider */
+.companions-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.companions-value {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Activity slider */
+.activity-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.activity-value-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.activity-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Symptom tracking */
+.add-symptom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-md);
+}
+
+.symptom-input {
+  padding: 0.75rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.symptom-input:focus {
+  outline: none;
+  border-color: var(--cannabis-green);
+}
+
+.symptom-level-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.symptom-level-selector label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.add-symptom-btn {
+  background-color: var(--cannabis-green);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-symptom-btn:hover {
+  background-color: var(--cannabis-green-hover);
+}
+
+.add-symptom-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.symptom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.symptom-item {
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+}
+
+.symptom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.symptom-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.remove-symptom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  color: var(--text-tertiary);
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.remove-symptom-btn:hover {
+  color: var(--error-color);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.symptom-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.symptom-level {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.symptom-level label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.no-symptoms {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-tertiary);
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-md);
+}
+
+/* Notes textarea */
+.session-notes {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  resize: vertical;
+  min-height: 6rem;
+  transition: border-color var(--transition-fast);
+}
+
+.session-notes:focus {
+  outline: none;
+  border-color: var(--cannabis-green);
+}
+
+.session-notes::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Controls */
+.insightful-session-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.insightful-session-end-btn,
+.insightful-session-cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.insightful-session-end-btn {
+  flex: 1;
+  background-color: var(--cannabis-green);
+  color: white;
+  border: none;
+}
+
+.insightful-session-end-btn:hover {
+  background-color: var(--cannabis-green-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.insightful-session-cancel-btn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.insightful-session-cancel-btn:hover {
+  color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+.insightful-session-end-btn svg,
+.insightful-session-cancel-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Disabled state */
+.insightful-session-start-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Pulse animation for active session */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.insightful-session-active .insightful-session-timer-icon {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .insightful-session-timer-display {
+    font-size: 1.5rem;
+  }
+  
+  .form-group {
+    padding: 1rem;
+  }
+  
+  .mood-options,
+  .method-options,
+  .type-options,
+  .purpose-options,
+  .setting-options {
+    justify-content: space-between;
+  }
+  
+  .mood-option {
+    min-width: 3.5rem;
+  }
+  
+  .insightful-session-controls {
+    flex-direction: column;
+  }
+} 

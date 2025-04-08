@@ -1,0 +1,239 @@
+/* Card Component Styles */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+  height: fit-content;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Card elevations */
+.card-elevation-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.card-elevation-md {
+  box-shadow: var(--shadow-md);
+}
+
+.card-elevation-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card with border */
+.card-bordered {
+  border: 1px solid var(--border-subtle);
+}
+
+/* Full width card */
+.card-full-width {
+  width: 100%;
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.card-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.card-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--card-title-color, var(--text-primary));
+}
+
+.card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.card-header-action {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Card body with padding options */
+.card-body {
+  flex: 1;
+}
+
+.card-padding-none {
+  padding: 0;
+}
+
+.card-padding-sm {
+  padding: var(--spacing-sm);
+}
+
+.card-padding-md {
+  padding: var(--spacing-md);
+}
+
+.card-padding-lg {
+  padding: var(--spacing-lg);
+}
+
+/* Card footer with alignment options */
+.card-footer {
+  display: flex;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.card-footer-left {
+  justify-content: flex-start;
+}
+
+.card-footer-center {
+  justify-content: center;
+}
+
+.card-footer-right {
+  justify-content: flex-end;
+}
+
+.card-footer-between {
+  justify-content: space-between;
+}
+
+/* Interactive card with hover effects */
+.card[onClick]:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card variants can be added here if needed later
+.card-primary {
+  border-top: 4px solid var(--accent-color);
+}
+
+.card-secondary {
+  border-top: 4px solid var(--accent-secondary);
+}
+*/
+
+/* Card Component Styles - DARK MODE ONLY */
+
+.card {
+  /* Base card styles */
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  color: var(--text-primary);
+}
+
+/* Card variants */
+
+/* Bordered card */
+.card-bordered {
+  border: 1px solid var(--border-color);
+}
+
+/* Elevated card with shadow */
+.card-elevated {
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+
+/* Interactive card (clickable) */
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-interactive:active {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card sections */
+
+/* Card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header-content {
+  flex: 1;
+}
+
+.card-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.card-header-action {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card body */
+.card-body {
+  padding: 1.25rem;
+}
+
+/* Card footer */
+.card-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Focused state for interactive cards */
+.card-interactive:focus-visible {
+  outline: 2px solid var(--cannabis-green);
+  outline-offset: 2px;
+}
+
+/* Additional utility variants */
+
+/* Card with no padding */
+.card-no-padding .card-body {
+  padding: 0;
+}
+
+/* Card with centered content */
+.card-centered .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+} 

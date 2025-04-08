@@ -1,0 +1,421 @@
+openapi: 3.0.0
+info:
+  title: Kush.Observer to Sesh-Tracker Webhook API
+  version: 1.0.0
+  description: |
+    This specification defines the webhook endpoints that Sesh-Tracker.com expects to receive
+    from Kush.Observer for user-related events. These webhooks enable real-time synchronization
+    of user data, permissions, and subscription changes. The Kush.Observer service is implemented
+    as a Cloudflare Worker using the OpenAuth template.
+
+servers:
+  - url: https://sesh-tracker.com/api/webhooks
+    description: Production Webhook Endpoint
+  - url: https://staging.sesh-tracker.com/api/webhooks
+    description: Staging Webhook Endpoint
+  - url: http://localhost:3000/api/webhooks
+    description: Development Webhook Endpoint
+
+paths:
+  /kush-user-update:
+    post:
+      summary: User data update webhook
+      description: |
+        Called when user information changes in Kush.Observer system.
+        This includes profile updates, role changes, subscription changes, etc.
+        Sent from the Cloudflare Worker implementation.
+      operationId: kushUserUpdate
+      security:
+        - webhookHmac: []
+      parameters:
+        - name: X-Kush-Signature
+          in: header
+          required: true
+          description: HMAC signature of the request body using the shared webhook secret
+          schema:
+            type: string
+            pattern: ^sha256=[a-f0-9]{64}$
+            example: sha256=5257a869e7e83f6b5a1e8126e5bcc7b1fcb8351a4a4e21ad2953203dc692b962
+        - name: X-Kush-Delivery
+          in: header
+          required: true
+          description: Unique ID for this webhook delivery (for idempotency)
+          schema:
+            type: string
+            format: uuid
+        - name: X-Kush-Timestamp
+          in: header
+          required: true
+          description: Timestamp of when the webhook was sent (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateEvent'
+      responses:
+        '200':
+          description: Webhook processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Webhook received and processed
+        '400':
+          description: Invalid webhook payload
+        '401':
+          description: Invalid signature
+        '409':
+          description: Duplicate webhook delivery
+        '500':
+          description: Server error processing webhook
+
+  /kush-user-delete:
+    post:
+      summary: User deletion webhook
+      description: |
+        Called when a user account is deleted or deactivated in Kush.Observer system.
+        Sent from the Cloudflare Worker implementation.
+      operationId: kushUserDelete
+      security:
+        - webhookHmac: []
+      parameters:
+        - name: X-Kush-Signature
+          in: header
+          required: true
+          description: HMAC signature of the request body using the shared webhook secret
+          schema:
+            type: string
+            pattern: ^sha256=[a-f0-9]{64}$
+        - name: X-Kush-Delivery
+          in: header
+          required: true
+          description: Unique ID for this webhook delivery (for idempotency)
+          schema:
+            type: string
+            format: uuid
+        - name: X-Kush-Timestamp
+          in: header
+          required: true
+          description: Timestamp of when the webhook was sent (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeleteEvent'
+      responses:
+        '200':
+          description: Webhook processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: User deletion processed
+        '400':
+          description: Invalid webhook payload
+        '401':
+          description: Invalid signature
+        '409':
+          description: Duplicate webhook delivery
+        '500':
+          description: Server error processing webhook
+
+  /kush-auth-event:
+    post:
+      summary: Authentication event webhook
+      description: |
+        Called when authentication events occur in the Kush.Observer system.
+        This includes successful logins, failed login attempts, password resets, etc.
+      operationId: kushAuthEvent
+      security:
+        - webhookHmac: []
+      parameters:
+        - name: X-Kush-Signature
+          in: header
+          required: true
+          description: HMAC signature of the request body using the shared webhook secret
+          schema:
+            type: string
+            pattern: ^sha256=[a-f0-9]{64}$
+        - name: X-Kush-Delivery
+          in: header
+          required: true
+          description: Unique ID for this webhook delivery (for idempotency)
+          schema:
+            type: string
+            format: uuid
+        - name: X-Kush-Timestamp
+          in: header
+          required: true
+          description: Timestamp of when the webhook was sent (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthEvent'
+      responses:
+        '200':
+          description: Webhook processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Auth event processed
+        '400':
+          description: Invalid webhook payload
+        '401':
+          description: Invalid signature
+        '409':
+          description: Duplicate webhook delivery
+        '500':
+          description: Server error processing webhook
+
+components:
+  schemas:
+    UserUpdateEvent:
+      type: object
+      required:
+        - event
+        - data
+        - timestamp
+      properties:
+        event:
+          type: string
+          enum:
+            - user.created
+            - user.updated
+            - user.role_changed
+            - user.subscription_changed
+          description: The type of user event that occurred
+          example: user.updated
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the event occurred
+          example: "2023-08-15T14:30:00Z"
+        data:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: The Kush.Observer user ID
+              example: "usr_12345abcde"
+            email:
+              type: string
+              format: email
+              description: User's email address
+              example: "user@example.com"
+            displayName:
+              type: string
+              description: User's display name
+              example: "John Doe"
+            role:
+              type: string
+              description: User's role in the system
+              enum:
+                - user
+                - admin
+              example: "user"
+            accountType:
+              type: string
+              description: Type of user account
+              enum:
+                - test
+                - demo
+                - user
+                - admin
+              example: "user"
+            subscriptionTier:
+              type: string
+              description: User's subscription level
+              enum:
+                - basic
+                - premium
+                - admin
+              example: "premium"
+            preferences:
+              type: object
+              description: User preferences (if changed)
+              additionalProperties: true
+              example:
+                theme: "dark"
+                notifications: true
+            metadata:
+              type: object
+              description: Additional metadata about the user
+              additionalProperties: true
+            cloudflare_metadata:
+              type: object
+              description: Cloudflare-specific metadata
+              properties:
+                country:
+                  type: string
+                  description: Country code from CF request
+                  example: "US"
+                colo:
+                  type: string
+                  description: Cloudflare colo that processed the request
+                  example: "DFW"
+
+    UserDeleteEvent:
+      type: object
+      required:
+        - event
+        - data
+        - timestamp
+      properties:
+        event:
+          type: string
+          enum:
+            - user.deleted
+            - user.deactivated
+          description: The type of deletion event
+          example: user.deleted
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the event occurred
+          example: "2023-08-15T14:30:00Z"
+        data:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: The Kush.Observer user ID being deleted
+              example: "usr_12345abcde"
+            deletion_reason:
+              type: string
+              description: Optional reason for deletion
+              enum:
+                - user_requested
+                - admin_action
+                - terms_violation
+                - subscription_ended
+              example: "user_requested"
+
+    AuthEvent:
+      type: object
+      required:
+        - event
+        - data
+        - timestamp
+      properties:
+        event:
+          type: string
+          enum:
+            - auth.login_success
+            - auth.login_failed
+            - auth.logout
+            - auth.password_reset_requested
+            - auth.password_reset_completed
+            - auth.token_revoked
+          description: The type of authentication event
+          example: auth.login_success
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the event occurred
+          example: "2023-08-15T14:30:00Z"
+        data:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: The Kush.Observer user ID
+              example: "usr_12345abcde"
+            email:
+              type: string
+              format: email
+              description: User's email address
+              example: "user@example.com"
+            client_id:
+              type: string
+              description: OAuth client ID that initiated the auth event
+              example: "seshtracker"
+            ip_address:
+              type: string
+              format: ipv4
+              description: IP address of the request (anonymized if necessary)
+              example: "192.0.2.1"
+            user_agent:
+              type: string
+              description: User agent string of the request
+              example: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            failure_reason:
+              type: string
+              description: Reason for authentication failure (for failed events)
+              enum:
+                - invalid_credentials
+                - account_locked
+                - rate_limited
+                - invalid_token
+              example: "invalid_credentials"
+
+  securitySchemes:
+    webhookHmac:
+      type: apiKey
+      name: X-Kush-Signature
+      in: header
+      description: |
+        HMAC signature of the request body using the shared webhook secret.
+        The signature is calculated as:
+        sha256=HEX(HMAC-SHA256(REQUEST_BODY, WEBHOOK_SECRET))
+        
+        For Cloudflare Workers implementation, the signature can be generated using:
+        ```js
+        async function generateSignature(payload, secret) {
+          const encoder = new TextEncoder();
+          const key = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(secret),
+            { name: 'HMAC', hash: 'SHA-256' },
+            false,
+            ['sign']
+          );
+          
+          const signature = await crypto.subtle.sign(
+            'HMAC',
+            key,
+            encoder.encode(JSON.stringify(payload))
+          );
+          
+          return 'sha256=' + Array.from(new Uint8Array(signature))
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+        }
+        ``` 

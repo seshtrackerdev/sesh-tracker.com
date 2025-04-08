@@ -1,0 +1,161 @@
+/* TerpeneProfile Component Styles - DARK MODE ONLY */
+
+.terpene-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Chart container */
+.terpene-profile-chart {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG sizing based on component size */
+.terpene-profile-sm .terpene-profile-svg {
+  width: 120px;
+  height: 120px;
+}
+
+.terpene-profile-md .terpene-profile-svg {
+  width: 180px;
+  height: 180px;
+}
+
+.terpene-profile-lg .terpene-profile-svg {
+  width: 240px;
+  height: 240px;
+}
+
+/* Terpene segments */
+.terpene-segment {
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  cursor: pointer;
+}
+
+.terpene-segment:hover {
+  transform: translateX(2px) translateY(-2px);
+  filter: brightness(1.2);
+}
+
+/* Inner circle (center) */
+.terpene-profile-inner-circle {
+  fill: var(--bg-secondary);
+  stroke: var(--border-color);
+  stroke-width: 1;
+}
+
+/* Empty state */
+.terpene-profile-empty {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Legend */
+.terpene-profile-legend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Legend items */
+.terpene-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.terpene-legend-item:hover {
+  background-color: var(--bg-elevated);
+}
+
+.terpene-legend-color {
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--border-radius-sm);
+  flex-shrink: 0;
+}
+
+.terpene-legend-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.terpene-legend-name {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.terpene-legend-percentage {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.terpene-legend-flavor {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Size-specific legend adjustments */
+.terpene-profile-sm .terpene-legend-name {
+  font-size: 0.75rem;
+}
+
+.terpene-profile-sm .terpene-legend-flavor {
+  font-size: 0.6875rem;
+}
+
+.terpene-profile-lg .terpene-legend-name {
+  font-size: 1rem;
+}
+
+.terpene-profile-lg .terpene-legend-flavor {
+  font-size: 0.875rem;
+}
+
+/* Horizontal layout for larger screens */
+@media (min-width: 640px) {
+  .terpene-profile {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .terpene-profile-chart {
+    flex: 0 0 auto;
+  }
+  
+  .terpene-profile-legend {
+    flex: 1;
+    margin-top: 0;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+} 

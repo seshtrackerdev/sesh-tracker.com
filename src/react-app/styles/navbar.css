@@ -1,0 +1,155 @@
+/* Navbar Styling - DARK MODE ONLY */
+
+.navbar {
+  position: fixed; /* Fixed position */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it's above other content */
+  background-color: #121212; /* Dark background */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 1rem 1.5rem;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Max width container */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Branding */
+.navbar-brand a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #e0e0e0; /* Light text for dark background */
+}
+
+/* Green gradient for "Sesh" text */
+.brand-gradient {
+  background: linear-gradient(to right, #4CAF50, #2E7D32);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* Toggle Button Container */
+.navbar-toggle {
+  /* Target the Button component inside */
+  /* Base styles for the Button are in Button.css */
+  /* No specific styles needed here unless overriding Button defaults */
+}
+
+/* Menu Dropdown */
+.navbar-menu {
+  position: absolute;
+  top: 100%;
+  /* Center the menu below the navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 450px; /* Increase max-width to avoid text cutoff */
+  background-color: #1e1e1e; /* Darker background for dropdown */
+  margin-top: 0.5rem; /* Space below navbar */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 1.25rem; /* Increase padding all around */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Increase gap between sections */
+  overflow: visible; /* Allow content to be fully visible */
+  z-index: 1001;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+/* Navigation Links Section */
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Increase spacing between links */
+  width: 100%; /* Full width container */
+}
+
+/* Action Buttons Section */
+.navbar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Spacing between buttons */
+  width: 100%; /* Full width container */
+}
+
+/* Menu Divider */
+.menu-divider {
+  height: 1px;
+  background-color: #444; /* Slightly lighter divider */
+  margin: 0.5rem 0; /* Vertical margin */
+  width: 100%;
+}
+
+/* Styling for <a> tags used as links in the menu */
+.nav-menu-link {
+  display: block; /* Make link take full width */
+  width: 100%;
+  padding: 0.75rem 1rem; /* Match button padding */
+  border-radius: 0.375rem; /* Match button radius */
+  font-weight: 500; /* Slightly less bold than buttons */
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  text-align: center;
+  text-decoration: none;
+  color: #e0e0e0; /* Light text */
+  background-color: #2d2d2d; /* Slightly visible background */
+  border: 1px solid transparent; /* Placeholder for alignment */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis for overflow */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+.nav-menu-link:hover {
+  background-color: #3d3d3d; /* Darker background on hover */
+  transform: translateY(-1px); /* Subtle lift */
+}
+
+/* Navbar-specific Button overrides */
+.navbar-menu .btn {
+  width: 100%; /* Ensure all buttons take full width */
+  margin: 0; /* Remove any default button margin */
+  padding: 0.75rem 1rem; /* Match nav-menu-link padding */
+  text-align: center; /* Center button text */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis for overflow */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+/* Switch to Classic Link Styling (Applied to <a> tag) */
+.btn-switch-classic {
+  /* Inherits .nav-menu-link styles */
+  background: linear-gradient(to right, #8b5cf6, #6366f1);
+  color: white;
+  border: none; /* Override border from nav-menu-link */
+  font-weight: 600; /* Match button weight */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.btn-switch-classic:hover {
+  background: linear-gradient(to right, #7c3aed, #4f46e5); /* Darken gradient on hover */
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px); /* Slightly more lift */
+  box-shadow: 0 4px 10px rgba(123, 97, 255, 0.3);
+}
+
+/* Utility classes (if still needed, Button uses btn-full-width) */
+.w-full { 
+  width: 100%;
+}
+
+.mt-2 { 
+  margin-top: 0.5rem;
+} 

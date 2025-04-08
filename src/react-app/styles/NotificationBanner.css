@@ -1,0 +1,139 @@
+/* NotificationBanner Component Styles - DARK MODE ONLY */
+
+.notification-banner {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1rem;
+  position: relative;
+  animation: notification-slide-in 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+/* Notification types */
+.notification-info {
+  background-color: rgba(33, 150, 243, 0.15);
+  border-left: 4px solid var(--info-color);
+}
+
+.notification-success {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-left: 4px solid var(--success-color);
+}
+
+.notification-warning {
+  background-color: rgba(255, 152, 0, 0.15);
+  border-left: 4px solid var(--warning-color);
+}
+
+.notification-error {
+  background-color: rgba(244, 67, 54, 0.15);
+  border-left: 4px solid var(--error-color);
+}
+
+/* Icon container */
+.notification-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Icon styling */
+.notification-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.notification-info .notification-icon {
+  color: var(--info-color);
+}
+
+.notification-success .notification-icon {
+  color: var(--success-color);
+}
+
+.notification-warning .notification-icon {
+  color: var(--warning-color);
+}
+
+.notification-error .notification-icon {
+  color: var(--error-color);
+}
+
+/* Content */
+.notification-content {
+  flex: 1;
+  padding-right: 1.5rem;
+}
+
+.notification-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.notification-message {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Action button or link */
+.notification-action {
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Close button */
+.notification-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--border-radius-full);
+  transition: all var(--transition-fast);
+}
+
+.notification-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Animation */
+@keyframes notification-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* For notification banners in a stack (e.g., notifications system) */
+.notification-stack {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 350px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+} 

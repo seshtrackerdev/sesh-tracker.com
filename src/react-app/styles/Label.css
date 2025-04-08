@@ -1,0 +1,24 @@
+/* Label Component */
+.ui-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e0e0e0;
+  margin-bottom: 6px;
+}
+
+.ui-label.required .required-indicator {
+  color: #f87171;
+  margin-left: 4px;
+}
+
+/* For form layouts */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group .ui-label + input, 
+.form-group .ui-label + select,
+.form-group .ui-label + textarea {
+  width: 100%;
+} 

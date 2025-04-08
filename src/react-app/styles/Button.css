@@ -1,0 +1,718 @@
+/* Button Component Styles */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Button Variants */
+  
+  .btn-primary {
+    background-color: var(--brand-primary, #00c853);
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--brand-primary-dark, #00b04a);
+    color: var(--btn-text-dark, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-primary:active:not(:disabled) {
+    background-color: var(--brand-primary-darker, #009940);
+    color: var(--btn-text-dark, #ffffff);
+    transform: translateY(0);
+  }
+  
+  .btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn-secondary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    filter: brightness(1.1);
+  }
+  
+  .btn-secondary:active:not(:disabled) {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    color: var(--brand-primary, #00c853);
+    border: 1px solid var(--brand-primary, #00c853);
+  }
+  
+  .btn-outline:hover:not(:disabled) {
+    background-color: rgba(0, 200, 83, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline:active:not(:disabled) {
+    background-color: rgba(0, 200, 83, 0.2);
+    transform: translateY(0);
+  }
+  
+  .btn-text {
+    background-color: transparent;
+    color: var(--btn-text-button-color, var(--text-primary));
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .btn-text:hover:not(:disabled) {
+    background-color: rgba(0, 200, 83, 0.1);
+  }
+  
+  .btn-text:active:not(:disabled) {
+    background-color: rgba(0, 200, 83, 0.2);
+  }
+  
+  .btn-danger {
+    background-color: var(--danger, #e53935);
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn-danger:hover:not(:disabled) {
+    background-color: #c62828;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-danger:active:not(:disabled) {
+    background-color: #b71c1c;
+    transform: translateY(0);
+  }
+  
+  /* Cannabis-themed buttons */
+  .btn-cannabis {
+    background-color: var(--cannabis-green, #43a047);
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: 0 4px 12px rgba(67, 160, 71, 0.3);
+  }
+  
+  .dark-theme .btn-cannabis {
+    color: var(--btn-text-dark, #ffffff);
+  }
+  
+  .btn-cannabis:hover:not(:disabled) {
+    background-color: var(--cannabis-green-dark, #00701a);
+    color: var(--btn-text-dark, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(67, 160, 71, 0.4);
+  }
+  
+  .btn-cannabis:active:not(:disabled) {
+    background-color: #005a14;
+    color: var(--btn-text-dark, #ffffff);
+    transform: translateY(0);
+  }
+  
+  .btn-cannabis::before {
+    content: "🍃";
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 12px;
+    opacity: 0;
+    transform: rotate(30deg) scale(0);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-cannabis:hover::before {
+    opacity: 0.8;
+    transform: rotate(30deg) scale(1);
+  }
+  
+  /* Triple leaf button - adds 3 animated cannabis leaves */
+  .btn-cannabis.btn-triple-leaf::after {
+    content: "🍃🍃🍃";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    letter-spacing: -5px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  .btn-cannabis.btn-triple-leaf:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    animation: float-triple-leaves 3s infinite;
+  }
+  
+  @keyframes float-triple-leaves {
+    0% { top: -20px; letter-spacing: -5px; }
+    50% { top: -30px; letter-spacing: 1px; }
+    100% { top: -20px; letter-spacing: -5px; }
+  }
+  
+  .btn-purple {
+    background-color: var(--cannabis-purple, #7b2cbf);
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
+  }
+  
+  .btn-purple:hover:not(:disabled) {
+    background-color: var(--cannabis-purple-dark, #4a148c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(123, 44, 191, 0.4);
+  }
+  
+  .btn-purple:active:not(:disabled) {
+    background-color: #38106d;
+    transform: translateY(0);
+  }
+  
+  /* Glow effect for purple */
+  .btn-purple.btn-glow {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .btn-purple.btn-glow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    background: linear-gradient(45deg, #7b2cbf, #ae52f4, #7b2cbf);
+    border-radius: calc(var(--radius-md) + 2px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-purple.btn-glow:hover::before {
+    opacity: 1;
+    animation: rotate-gradient 3s linear infinite;
+  }
+  
+  @keyframes rotate-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .btn-gradient {
+    background: linear-gradient(45deg, var(--cannabis-green, #43a047), var(--cannabis-purple, #7b2cbf));
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: 0 4px 12px rgba(67, 160, 71, 0.3);
+    background-size: 200% 200%;
+    animation: gradient-position 4s ease infinite;
+  }
+  
+  @keyframes gradient-position {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .btn-gradient:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(123, 44, 191, 0.3);
+    animation: gradient-position 2s ease infinite;
+  }
+  
+  .btn-gradient:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  /* Animated smoke effect */
+  .btn-gradient.btn-smoke::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20' viewBox='0 0 100 20'%3E%3Cpath fill='none' stroke='white' stroke-opacity='0.2' stroke-width='1' d='M10,10 C15,5 20,15 25,10 C30,5 35,15 40,10 C45,5 50,15 55,10 C60,5 65,15 70,10 C75,5 80,15 85,10 C90,5 95,15 100,10'/%3E%3C/svg%3E") repeat-x;
+    background-size: 100px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    animation: move-smoke 15s linear infinite;
+  }
+  
+  .btn-gradient.btn-smoke:hover::before {
+    opacity: 0.7;
+  }
+  
+  @keyframes move-smoke {
+    0% { background-position: 0 10px; }
+    100% { background-position: 100px 10px; }
+  }
+  
+  .btn-gold {
+    background-color: var(--cannabis-gold, #ffc107);
+    color: var(--btn-text-light, #000000);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    font-weight: 700;
+  }
+  
+  .btn-gold:hover:not(:disabled) {
+    background-color: #ffb300;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+  }
+  
+  .btn-gold:active:not(:disabled) {
+    background-color: #ffa000;
+    transform: translateY(0);
+  }
+  
+  /* Gold shimmer effect */
+  .btn-gold.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-gold.btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shimmer 4s infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-gold.btn-shimmer:hover::after {
+    opacity: 1;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) rotate(30deg); }
+  }
+  
+  /* Pixel Button - retro pixelated style */
+  .btn-pixel {
+    border: 3px solid var(--cannabis-green-dark, #00701a);
+    background-color: var(--cannabis-green, #43a047);
+    color: var(--btn-text-dark, #ffffff);
+    box-shadow: 4px 4px 0 var(--cannabis-green-dark, #00701a);
+    border-radius: 2px;
+    transform: translate(-3px, -3px);
+    transition: transform 0.15s, box-shadow 0.15s;
+    font-family: monospace;
+    text-shadow: none;
+  }
+  
+  .dark-theme .btn-pixel {
+    color: var(--btn-text-dark, #ffffff);
+  }
+  
+  .btn-pixel:hover:not(:disabled) {
+    transform: translate(-4px, -4px);
+    box-shadow: 5px 5px 0 var(--cannabis-green-dark, #00701a);
+  }
+  
+  .btn-pixel:active:not(:disabled) {
+    transform: translate(0, 0);
+    box-shadow: 0 0 0 var(--cannabis-green-dark, #00701a);
+  }
+  
+  /* Button Sizes */
+  
+  .btn-xs {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    height: 1.75rem;
+  }
+  
+  .btn-sm {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+    height: 2rem;
+  }
+  
+  .btn-md {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    height: 2.5rem;
+  }
+  
+  .btn-lg {
+    font-size: 1rem;
+    padding: 0.625rem 1.25rem;
+    height: 3rem;
+  }
+  
+  /* Button Width */
+  
+  .btn-full {
+    width: 100%;
+  }
+  
+  /* Rounded Style */
+  .btn-rounded {
+    border-radius: 9999px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  /* Button States */
+  
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.25);
+  }
+  
+  /* Button Elements */
+  
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+  
+  /* Loading Spinner */
+  
+  .btn-loading {
+    cursor: wait;
+    position: relative;
+  }
+  
+  .btn-loading .btn-text {
+    opacity: 0.6;
+  }
+  
+  .btn-spinner {
+    display: inline-flex;
+    margin-right: 8px;
+    animation: spin 1s linear infinite;
+  }
+  
+  .btn-spinner svg {
+    width: 1em;
+    height: 1em;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Focus styles for accessibility */
+  .btn:focus-visible {
+    outline: 2px solid var(--brand-primary, #00c853);
+    outline-offset: 2px;
+  }
+  
+  /* Button with icon */
+  .btn-with-icon {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .btn-icon-left {
+    flex-direction: row;
+  }
+  
+  .btn-icon-right {
+    flex-direction: row-reverse;
+  }
+  
+  /* Ensure text inside buttons inherits the button's color */
+  .btn .btn-text {
+    color: inherit;
+  }
+  
+  /* Button Component Styles - DARK MODE ONLY */
+  
+  .btn {
+    /* Base button styles */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    user-select: none;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  /* Button Sizes */
+  .btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    min-height: 2rem;
+  }
+  
+  .btn-md {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    min-height: 2.5rem;
+  }
+  
+  .btn-lg {
+    padding: 0.675rem 1.25rem;
+    font-size: 1.125rem;
+    min-height: 3rem;
+  }
+  
+  /* Button Variants */
+  
+  /* Primary Button - Green, main CTAs */
+  .btn-primary {
+    background-color: var(--cannabis-green);
+    color: white;
+    border-color: var(--cannabis-green);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--cannabis-green-hover);
+    border-color: var(--cannabis-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  /* Secondary Button - Elevated dark gray */
+  .btn-secondary {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  
+  .btn-secondary:hover {
+    background-color: #2d2d2d;
+    border-color: var(--border-color-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  /* Outline Button - Transparent with border */
+  .btn-outline {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  
+  .btn-outline:hover {
+    border-color: var(--cannabis-green);
+    color: var(--cannabis-green);
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline:active {
+    transform: translateY(0);
+  }
+  
+  /* Ghost Button - Minimal button */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: transparent;
+  }
+  
+  .btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+  }
+  
+  /* Danger Button - Red, for destructive actions */
+  .btn-danger {
+    background-color: var(--error-color);
+    color: white;
+    border-color: var(--error-color);
+  }
+  
+  .btn-danger:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-danger:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  /* Success Button - Green, for confirmations */
+  .btn-success {
+    background-color: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+  }
+  
+  .btn-success:hover {
+    background-color: var(--cannabis-green-hover);
+    border-color: var(--cannabis-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-success:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  /* Icon Button - Typically circular */
+  .btn-icon {
+    padding: 0.5rem;
+    border-radius: var(--border-radius-full);
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+  
+  .btn-icon.btn-sm {
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0.375rem;
+  }
+  
+  .btn-icon.btn-lg {
+    min-width: 3rem;
+    min-height: 3rem;
+    padding: 0.675rem;
+  }
+  
+  .btn-icon:hover {
+    background-color: #2d2d2d;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  /* Full Width Button */
+  .btn-full-width {
+    width: 100%;
+    display: flex;
+  }
+  
+  /* Icon Positioning */
+  .btn-icon-left {
+    margin-right: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-icon-right {
+    margin-left: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Loading State */
+  .btn-loading {
+    cursor: wait;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  .btn-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    position: relative;
+  }
+  
+  .btn-spinner-dot {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Disabled State */
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Focus State */
+  .btn:focus-visible {
+    outline: 2px solid var(--cannabis-green);
+    outline-offset: 2px;
+  }
+  
+  /* Active State */
+  .btn:active {
+    transform: scale(0.98);
+  } 

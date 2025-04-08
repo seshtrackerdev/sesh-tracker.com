@@ -1,0 +1,214 @@
+# Kush.Observer Webhook Testing Script (Cloudflare Workers)
+# Use with REST Client extension for VS Code or similar HTTP client
+
+@baseUrl = https://kush.observer/api/webhooks
+@localUrl = http://localhost:8787/api/webhooks
+@testSecret = {YOUR_WEBHOOK_SECRET}
+@userId = usr_test12345
+
+# This file contains sample webhook requests to test the integration
+# between Kush.Observer and Sesh-Tracker.com
+
+### TEST ENVIRONMENT VARIABLES
+# Replace these values with your actual testing credentials
+
+@testTimestamp = {{$timestamp}}
+@testDeliveryId = {{$guid}}
+
+
+### 1. Test User Update Webhook
+
+# First, generate a signature for the webhook using the shared secret
+# The signature is a HMAC-SHA256 of the request body using the webhook secret
+# You can use this online tool: https://www.freeformatter.com/hmac-generator.html
+# Or a command line: echo -n '{"event":"user.updated","data":{"id":"usr_test12345",...}}' | openssl dgst -sha256 -hmac "YOUR_WEBHOOK_SECRET" -hex
+
+# IMPORTANT: Calculate the signature for the EXACT JSON body being sent
+
+POST {{localUrl}}/kush-user-update
+Content-Type: application/json
+X-Kush-Signature: sha256=REPLACE_WITH_CALCULATED_SIGNATURE
+X-Kush-Delivery: {{testDeliveryId}}
+
+{
+  "event": "user.updated",
+  "data": {
+    "id": "{{userId}}",
+    "email": "tester@email.com",
+    "displayName": "Test User",
+    "role": "user",
+    "accountType": "test",
+    "subscriptionTier": "premium",
+    "preferences": {
+      "theme": "dark",
+      "notifications": true
+    }
+  }
+}
+
+### 2. Test Role Change Webhook
+
+POST {{localUrl}}/kush-user-update
+Content-Type: application/json
+X-Kush-Signature: sha256=REPLACE_WITH_CALCULATED_SIGNATURE
+X-Kush-Delivery: {{testDeliveryId}}
+
+{
+  "event": "user.role_changed",
+  "data": {
+    "id": "{{userId}}",
+    "email": "tester@email.com",
+    "role": "admin",
+    "previousRole": "user"
+  }
+}
+
+### 3. Test Subscription Change Webhook
+
+POST {{localUrl}}/kush-user-update
+Content-Type: application/json
+X-Kush-Signature: sha256=REPLACE_WITH_CALCULATED_SIGNATURE
+X-Kush-Delivery: {{testDeliveryId}}
+
+{
+  "event": "user.subscription_changed",
+  "data": {
+    "id": "{{userId}}",
+    "email": "tester@email.com",
+    "subscriptionTier": "basic",
+    "previousTier": "premium",
+    "effectiveDate": "{{testTimestamp}}"
+  }
+}
+
+### 4. Test User Delete Webhook
+
+POST {{localUrl}}/kush-user-delete
+Content-Type: application/json
+X-Kush-Signature: sha256=REPLACE_WITH_CALCULATED_SIGNATURE
+X-Kush-Delivery: {{testDeliveryId}}
+
+{
+  "event": "user.deleted",
+  "data": {
+    "id": "{{userId}}",
+    "deletion_reason": "user_requested"
+  }
+}
+
+### 5. Test Webhook with Invalid Signature (Should Fail)
+
+POST {{localUrl}}/kush-user-update
+Content-Type: application/json
+X-Kush-Signature: sha256=invalid_signature_1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+X-Kush-Delivery: {{testDeliveryId}}
+
+{
+  "event": "user.updated",
+  "data": {
+    "id": "{{userId}}",
+    "email": "tester@email.com"
+  }
+}
+
+### 6. Test Webhook with Duplicate Delivery ID (Should Handle Idempotently)
+
+# Send this request twice with the same X-Kush-Delivery value
+# The second request should be recognized as a duplicate
+
+POST {{localUrl}}/kush-user-update
+Content-Type: application/json
+X-Kush-Signature: sha256=REPLACE_WITH_CALCULATED_SIGNATURE
+X-Kush-Delivery: fixed-delivery-id-for-test
+
+{
+  "event": "user.updated",
+  "data": {
+    "id": "{{userId}}",
+    "email": "tester@email.com",
+    "displayName": "Duplicate Test"
+  }
+}
+
+### 7. Generate Test Signature (Cloudflare Workers)
+
+# This script will help generate signatures for testing
+# You can run this in the Cloudflare Worker console or Node.js
+
+POST https://kush.observer/test/generate-signature
+Content-Type: application/json
+
+{
+  "webhookSecret": "{{testSecret}}",
+  "payload": {
+    "event": "user.updated",
+    "data": {
+      "id": "{{userId}}",
+      "email": "tester@email.com"
+    }
+  }
+}
+
+### Helper: How to Generate Webhook Signatures (Node.js)
+
+# Node.js Example:
+# 
+# const crypto = require('crypto');
+# 
+# function generateWebhookSignature(payload, secret) {
+#   const hmac = crypto.createHmac('sha256', secret);
+#   hmac.update(JSON.stringify(payload));
+#   return `sha256=${hmac.digest('hex')}`;
+# }
+# 
+# const payload = {
+#   event: 'user.updated',
+#   data: {
+#     id: 'usr_test12345',
+#     email: 'tester@email.com'
+#   }
+# };
+# 
+# const signature = generateWebhookSignature(payload, 'your_webhook_secret');
+# console.log(signature);
+
+### Helper: How to Generate Webhook Signatures (Cloudflare Workers)
+
+# Cloudflare Workers Example:
+# 
+# async function generateSignature(payload, secret) {
+#   // Convert the secret to a key using Web Crypto API
+#   const encoder = new TextEncoder();
+#   const secretKeyData = encoder.encode(secret);
+#   const secretKey = await crypto.subtle.importKey(
+#     'raw',
+#     secretKeyData,
+#     { name: 'HMAC', hash: 'SHA-256' },
+#     false,
+#     ['sign']
+#   );
+# 
+#   // Create signature
+#   const payloadBytes = encoder.encode(JSON.stringify(payload));
+#   const signatureBuffer = await crypto.subtle.sign(
+#     'HMAC',
+#     secretKey,
+#     payloadBytes
+#   );
+# 
+#   // Convert to hex string
+#   const signatureArray = Array.from(new Uint8Array(signatureBuffer));
+#   const signatureHex = signatureArray.map(b => b.toString(16).padStart(2, '0')).join('');
+# 
+#   return `sha256=${signatureHex}`;
+# }
+#
+# // Usage example
+# const payload = {
+#   event: 'user.updated',
+#   data: { id: 'usr_test12345', email: 'tester@email.com' }
+# };
+# 
+# generateSignature(payload, 'your_webhook_secret').then(signature => {
+#   console.log(signature);
+# }); 

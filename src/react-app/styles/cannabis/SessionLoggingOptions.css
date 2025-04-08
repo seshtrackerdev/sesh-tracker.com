@@ -1,0 +1,144 @@
+/* SessionLoggingOptions Component Styles - DARK MODE ONLY */
+
+.session-logging-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Tabs navigation */
+.logging-tabs {
+  display: flex;
+  padding: 0.5rem;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logging-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex: 1;
+}
+
+.logging-tab:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.logging-tab.active {
+  background-color: var(--cannabis-green-transparent);
+  color: var(--cannabis-green);
+}
+
+.tab-icon {
+  flex-shrink: 0;
+}
+
+/* Content area */
+.logging-content {
+  padding: 1.5rem;
+}
+
+.logging-option {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.option-heading {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.option-heading h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.option-heading p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Animation for tab switching */
+.logging-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .session-logging-options {
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .logging-tabs {
+    padding: 0.25rem;
+  }
+  
+  .logging-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .logging-content {
+    padding: 1rem;
+  }
+  
+  .option-heading h3 {
+    font-size: 1.25rem;
+  }
+  
+  .option-heading p {
+    font-size: 0.875rem;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .logging-tab span {
+    display: none;
+  }
+  
+  .logging-tab {
+    padding: 0.5rem;
+  }
+  
+  .tab-icon {
+    margin: 0;
+  }
+} 

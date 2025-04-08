@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesh-Tracker API Tester</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .response {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .endpoints {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .endpoint-btn {
+      background-color: #2196F3;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      margin-right: 5px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+    .tab.active {
+      background-color: white;
+      border-bottom-color: white;
+      margin-bottom: -1px;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sesh-Tracker API Tester</h1>
+    
+    <div class="tabs">
+      <div class="tab active" data-tab="request-builder">Request Builder</div>
+      <div class="tab" data-tab="batch-test">Batch Test</div>
+    </div>
+    
+    <div id="request-builder" class="tab-content active">
+      <div class="form-group">
+        <label for="base-url">Base URL:</label>
+        <input type="text" id="base-url" value="http://localhost:4001/api/v1">
+      </div>
+      
+      <div class="form-group">
+        <label for="endpoint">Endpoint:</label>
+        <input type="text" id="endpoint" value="/health">
+      </div>
+      
+      <div class="endpoints">
+        <button class="endpoint-btn" data-endpoint="/health">Health</button>
+        <button class="endpoint-btn" data-endpoint="/mood">Get Moods</button>
+        <button class="endpoint-btn" data-endpoint="/medical-symptoms">Get Symptoms</button>
+        <button class="endpoint-btn" data-endpoint="/journal">Get Journal</button>
+      </div>
+      
+      <div class="form-group">
+        <label for="method">Method:</label>
+        <select id="method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="auth-type">Authentication:</label>
+        <select id="auth-type">
+          <option value="none">None</option>
+          <option value="bearer">Bearer Token Only</option>
+          <option value="mock">Mock User Type Only</option>
+          <option value="both">Both Bearer + Mock</option>
+        </select>
+      </div>
+      
+      <div class="form-group" id="token-group" style="display: none;">
+        <label for="bearer-token">Bearer Token:</label>
+        <input type="text" id="bearer-token" value="mock-token-for-development">
+      </div>
+      
+      <div class="form-group" id="mock-group" style="display: none;">
+        <label for="mock-user">Mock User Type:</label>
+        <select id="mock-user">
+          <option value="test">Test User</option>
+          <option value="demo">Demo User</option>
+          <option value="admin">Admin User</option>
+        </select>
+      </div>
+      
+      <div class="form-group" id="body-group" style="display: none;">
+        <label for="request-body">Request Body (JSON):</label>
+        <textarea id="request-body" rows="10"></textarea>
+      </div>
+      
+      <button id="send-request">Send Request</button>
+      
+      <div class="response" id="response"></div>
+    </div>
+    
+    <div id="batch-test" class="tab-content">
+      <div class="form-group">
+        <label for="batch-base-url">Base URL:</label>
+        <input type="text" id="batch-base-url" value="http://localhost:4001/api/v1">
+      </div>
+      
+      <div class="form-group">
+        <label for="batch-auth-type">Authentication:</label>
+        <select id="batch-auth-type">
+          <option value="none">None</option>
+          <option value="bearer">Bearer Token Only</option>
+          <option value="mock">Mock User Type Only</option>
+          <option value="both">Both Bearer + Mock</option>
+        </select>
+      </div>
+      
+      <div class="form-group" id="batch-token-group" style="display: none;">
+        <label for="batch-bearer-token">Bearer Token:</label>
+        <input type="text" id="batch-bearer-token" value="mock-token-for-development">
+      </div>
+      
+      <div class="form-group" id="batch-mock-group" style="display: none;">
+        <label for="batch-mock-user">Mock User Type:</label>
+        <select id="batch-mock-user">
+          <option value="test">Test User</option>
+          <option value="demo">Demo User</option>
+          <option value="admin">Admin User</option>
+        </select>
+      </div>
+      
+      <button id="run-batch-test">Run All Tests</button>
+      
+      <div class="response" id="batch-response"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Test data for requests
+    const testData = {
+      mood: {
+        userId: 'test-user-id',
+        rating: 8,
+        note: 'Feeling great today!',
+        tags: ['relaxed', 'happy', 'productive'],
+        createdAt: new Date().toISOString()
+      },
+      symptom: {
+        userId: 'test-user-id',
+        symptom: 'Headache',
+        severity: 5,
+        duration: '2 hours',
+        notes: 'Mild headache after working on computer',
+        tags: ['stress', 'work'],
+        createdAt: new Date().toISOString()
+      },
+      journal: {
+        userId: 'test-user-id',
+        title: 'Today\'s Reflections',
+        content: 'Had a productive day working on my wellness tracking features...',
+        tags: ['coding', 'wellness', 'productivity'],
+        mood: 7,
+        isPrivate: true,
+        createdAt: new Date().toISOString()
+      }
+    };
+    
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+    
+    // Method change handler
+    document.getElementById('method').addEventListener('change', function() {
+      const bodyGroup = document.getElementById('body-group');
+      if (this.value === 'POST' || this.value === 'PUT') {
+        bodyGroup.style.display = 'block';
+        
+        // Set appropriate test data based on endpoint
+        const endpoint = document.getElementById('endpoint').value;
+        if (endpoint.includes('mood')) {
+          document.getElementById('request-body').value = JSON.stringify(testData.mood, null, 2);
+        } else if (endpoint.includes('medical-symptoms')) {
+          document.getElementById('request-body').value = JSON.stringify(testData.symptom, null, 2);
+        } else if (endpoint.includes('journal')) {
+          document.getElementById('request-body').value = JSON.stringify(testData.journal, null, 2);
+        }
+      } else {
+        bodyGroup.style.display = 'none';
+      }
+    });
+    
+    // Auth type change handlers
+    document.getElementById('auth-type').addEventListener('change', function() {
+      const tokenGroup = document.getElementById('token-group');
+      const mockGroup = document.getElementById('mock-group');
+      
+      if (this.value === 'bearer' || this.value === 'both') {
+        tokenGroup.style.display = 'block';
+      } else {
+        tokenGroup.style.display = 'none';
+      }
+      
+      if (this.value === 'mock' || this.value === 'both') {
+        mockGroup.style.display = 'block';
+      } else {
+        mockGroup.style.display = 'none';
+      }
+    });
+    
+    document.getElementById('batch-auth-type').addEventListener('change', function() {
+      const tokenGroup = document.getElementById('batch-token-group');
+      const mockGroup = document.getElementById('batch-mock-group');
+      
+      if (this.value === 'bearer' || this.value === 'both') {
+        tokenGroup.style.display = 'block';
+      } else {
+        tokenGroup.style.display = 'none';
+      }
+      
+      if (this.value === 'mock' || this.value === 'both') {
+        mockGroup.style.display = 'block';
+      } else {
+        mockGroup.style.display = 'none';
+      }
+    });
+    
+    // Endpoint button clicks
+    document.querySelectorAll('.endpoint-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        document.getElementById('endpoint').value = button.dataset.endpoint;
+        
+        // Reset method to GET
+        document.getElementById('method').value = 'GET';
+        document.getElementById('body-group').style.display = 'none';
+      });
+    });
+    
+    // Send request
+    document.getElementById('send-request').addEventListener('click', async () => {
+      const baseUrl = document.getElementById('base-url').value;
+      const endpoint = document.getElementById('endpoint').value;
+      const method = document.getElementById('method').value;
+      const authType = document.getElementById('auth-type').value;
+      
+      const responseEl = document.getElementById('response');
+      responseEl.textContent = 'Sending request...';
+      
+      try {
+        const headers = { 'Content-Type': 'application/json' };
+        
+        if (authType === 'bearer' || authType === 'both') {
+          const token = document.getElementById('bearer-token').value;
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+        
+        if (authType === 'mock' || authType === 'both') {
+          const mockUserType = document.getElementById('mock-user').value;
+          headers['X-Mock-User-Type'] = mockUserType;
+        }
+        
+        const options = { method, headers };
+        
+        if (method === 'POST' || method === 'PUT') {
+          const bodyText = document.getElementById('request-body').value;
+          options.body = bodyText;
+        }
+        
+        const url = `${baseUrl}${endpoint}`;
+        const response = await fetch(url, options);
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('application/json')) {
+          const json = await response.json();
+          responseEl.textContent = `Status: ${response.status}\n\n${JSON.stringify(json, null, 2)}`;
+        } else {
+          const text = await response.text();
+          responseEl.textContent = `Status: ${response.status}\n\n${text || '(No response body)'}`;
+        }
+      } catch (error) {
+        responseEl.textContent = `Error: ${error.message}`;
+      }
+    });
+    
+    // Batch testing
+    document.getElementById('run-batch-test').addEventListener('click', async () => {
+      const baseUrl = document.getElementById('batch-base-url').value;
+      const authType = document.getElementById('batch-auth-type').value;
+      const responseEl = document.getElementById('batch-response');
+      
+      responseEl.textContent = 'Running batch tests...\n';
+      
+      // Prepare auth headers
+      const headers = { 'Content-Type': 'application/json' };
+      
+      if (authType === 'bearer' || authType === 'both') {
+        const token = document.getElementById('batch-bearer-token').value;
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      
+      if (authType === 'mock' || authType === 'both') {
+        const mockUserType = document.getElementById('batch-mock-user').value;
+        headers['X-Mock-User-Type'] = mockUserType;
+      }
+      
+      // Define test endpoints
+      const tests = [
+        { name: 'Health Check', endpoint: '/health', method: 'GET' },
+        { name: 'Get Moods', endpoint: '/mood', method: 'GET' },
+        { name: 'Create Mood', endpoint: '/mood', method: 'POST', body: testData.mood },
+        { name: 'Get Symptoms', endpoint: '/medical-symptoms', method: 'GET' },
+        { name: 'Create Symptom', endpoint: '/medical-symptoms', method: 'POST', body: testData.symptom },
+        { name: 'Get Journal Entries', endpoint: '/journal', method: 'GET' },
+        { name: 'Create Journal Entry', endpoint: '/journal', method: 'POST', body: testData.journal }
+      ];
+      
+      // Run each test
+      let allPassed = true;
+      for (const test of tests) {
+        try {
+          responseEl.textContent += `\n----- Testing ${test.name} -----\n`;
+          
+          const options = { 
+            method: test.method, 
+            headers: { ...headers }
+          };
+          
+          if (test.body && (test.method === 'POST' || test.method === 'PUT')) {
+            options.body = JSON.stringify(test.body);
+          }
+          
+          const url = `${baseUrl}${test.endpoint}`;
+          responseEl.textContent += `Request: ${test.method} ${url}\n`;
+          
+          const response = await fetch(url, options);
+          let responseData;
+          
+          try {
+            responseData = await response.json();
+            responseEl.textContent += `Status: ${response.status}\n`;
+            responseEl.textContent += `Response: ${JSON.stringify(responseData, null, 2)}\n`;
+          } catch (e) {
+            const text = await response.text();
+            responseEl.textContent += `Status: ${response.status}\n`;
+            responseEl.textContent += `Response: ${text || '(No response body)'}\n`;
+          }
+          
+          if (response.status >= 400) {
+            allPassed = false;
+            responseEl.textContent += `⚠️ Test Failed\n`;
+          } else {
+            responseEl.textContent += `✅ Test Passed\n`;
+            
+            // Store IDs for subsequent tests
+            if (test.method === 'POST' && responseData?.data?.id) {
+              const idType = test.endpoint.substring(1) + 'Id'; // /mood -> moodId
+              window[idType] = responseData.data.id;
+              responseEl.textContent += `Saved ${idType}: ${responseData.data.id}\n`;
+            }
+          }
+        } catch (error) {
+          allPassed = false;
+          responseEl.textContent += `Error: ${error.message}\n⚠️ Test Failed\n`;
+        }
+      }
+      
+      responseEl.textContent += `\n----- Test Summary -----\n`;
+      responseEl.textContent += allPassed ? '✅ All tests passed!' : '⚠️ Some tests failed';
+    });
+  </script>
+</body>
+</html> 

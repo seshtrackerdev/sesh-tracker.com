@@ -1,0 +1,196 @@
+/* QuickSessionButton Component Styles - DARK MODE ONLY */
+
+.quick-session {
+  width: 100%;
+}
+
+/* Start button */
+.quick-session-start-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.25) 0%, rgba(61, 90, 254, 0.25) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  border-radius: var(--border-radius-lg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quick-session-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--cannabis-green);
+}
+
+.quick-session-start-btn:active {
+  transform: translateY(0);
+}
+
+/* Button icon */
+.quick-session-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--cannabis-green);
+  color: white;
+  flex-shrink: 0;
+}
+
+.quick-session-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* Button text */
+.quick-session-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.quick-session-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.quick-session-sublabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Active session state */
+.quick-session-active {
+  width: 100%;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Timer display */
+.quick-session-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius-lg);
+}
+
+.quick-session-timer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--cannabis-green);
+  color: white;
+}
+
+.quick-session-timer-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.quick-session-timer-display {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+/* Controls */
+.quick-session-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.quick-session-end-btn,
+.quick-session-cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.quick-session-end-btn {
+  flex: 1;
+  background-color: var(--cannabis-green);
+  color: white;
+  border: none;
+}
+
+.quick-session-end-btn:hover {
+  background-color: var(--cannabis-green-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-session-cancel-btn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.quick-session-cancel-btn:hover {
+  color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+.quick-session-end-btn svg,
+.quick-session-cancel-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Disabled state */
+.quick-session-start-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Pulse animation for active session */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quick-session-active .quick-session-timer-icon {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .quick-session-timer-display {
+    font-size: 1.5rem;
+  }
+  
+  .quick-session-controls {
+    flex-direction: column;
+  }
+} 
